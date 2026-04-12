@@ -1,0 +1,29 @@
+<div class="community-show">
+  <div class="community-header">
+    <h1><%= @community.name %></h1>
+    <p class="community-description"><%= @community.description %></p>
+
+    <% if @community.rules.present? %>
+      <div class="community-rules">
+        <h3>Community Rules</h3>
+        <p><%= @community.rules %></p>
+      </div>
+    <% end %>
+
+    <div class="community-meta">
+      <p>Owner: <%= @community.owner.name %></p>
+      <p>Members: <%= @community.members.count %></p>
+    </div>
+
+    <% if user_signed_in? && current_user.can_manage_community?(@community) %>
+      <div class="community-actions">
+        <%= link_to "Edit", edit_community_path(@community), class: "btn btn-secondary" %>
+        <%= button_to "Delete", @community, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      </div>
+    <% end %>
+
+    <% if user_signed_in? && !current_user.member_of?(@community) %>
+      <%= button_to "Join Community", community_memberships_path(@community), class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,1 +1,32 @@
-Hello World
+<div class="welcome-page">
+  <div class="hero">
+    <h1>Welcome to CUHK Second-hand Marketplace</h1>
+    <p>Buy and sell items within the CUHK community</p>
+
+    <% if user_signed_in? %>
+      <div class="user-info">
+        <p>Welcome, <%= current_user.name %>!</p>
+      </div>
+      <div class="actions">
+        <%= link_to "Communities", communities_path, class: "btn btn-primary" %>
+        <%= link_to "My Profile", edit_user_registration_path, class: "btn btn-secondary" %>
+      </div>
+    <% else %>
+      <div class="actions">
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-primary" %>
+        <%= link_to "Log In", new_user_session_path, class: "btn btn-secondary" %>
+        <%= link_to "Communities", communities_path, class: "btn btn-secondary" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature">
+        <h3>Autonomous Communities</h3>
+        <p>Create and join trading communities with custom rules</p>
+      </div>
+    </div>
+  </div>
+</div>
