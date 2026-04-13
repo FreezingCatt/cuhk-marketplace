@@ -33,3 +33,9 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+# Ignore Test Coverage results
+/coverage/
+
+# If you use RSpec specific local configurations
+.rspec
