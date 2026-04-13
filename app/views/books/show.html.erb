@@ -1,0 +1,25 @@
+<h1><%= @book.title %></h1>
+<p><strong>Author:</strong> <%= @book.author %></p>
+<p><strong>Price:</strong> HK$ <%= @book.price %></p>
+<p><strong>Condition:</strong> <%= @book.condition %></p>
+<p><strong>Location:</strong> <%= @book.location %></p>
+<p><strong>Status:</strong> <%= @book.status.humanize %></p>
+<p><strong>Seller:</strong> <%= @book.user.email %></p>
+
+<% if @book.latitude && @book.longitude %>
+  <div id="map" style="height: 300px; width: 100%; margin-top: 20px;"></div>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    var map = L.map('map').setView([<%= @book.latitude %>, <%= @book.longitude %>], 15);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+    L.marker([<%= @book.latitude %>, <%= @book.longitude %>]).addTo(map);
+  </script>
+<% end %>
+
+<% if current_user == @book.user %>
+  <%= link_to 'Edit', edit_book_path(@book) %> |
+  <%= link_to 'Delete', @book, method: :delete %>
+<% end %>
+
+<%= link_to 'Back to Books', books_path %>
