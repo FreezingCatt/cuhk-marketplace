@@ -36,13 +36,15 @@ gem "kaminari", "~> 1.2"
 
 group :development, :test do
   gem "debug", platforms: %i[ mri windows ]
-  gem "rspec-rails", "~> 6.1"
+  gem "rspec-rails", "~> 7.0"
   gem "factory_bot_rails", "~> 6.4"
   gem "faker", "~> 3.2"
   gem "cucumber-rails", require: false
   gem "database_cleaner", "~> 1.8"
   gem "shoulda-matchers", "~> 6.0"
   gem "simplecov", require: false
+  gem "capybara"
+  gem "selenium-webdriver"
 end
 
 group :development do
@@ -52,4 +54,5 @@ end
 group :test do
   gem "capybara"
   gem "selenium-webdriver"
+  gem 'simplecov', require: false
 end

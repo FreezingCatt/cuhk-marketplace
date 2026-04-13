@@ -130,6 +130,22 @@ The application is deployed on [Heroku/Render].
 
 **Live URL**: [https://cuhk-marketplace.herokuapp.com](https://cuhk-marketplace.herokuapp.com)
 
+### Docker Deployment
+
+1. **Prerequisites**
+   Ensure you have **Docker** and **Docker Compose** installed on your machine (or use GitHub Codespaces).
+
+2. **Launch the Environment**
+   Build the images and start the containers in detached mode:
+   ```bash
+   docker-compose up --build -d
+   ```
+
+   Once the containers are running, run the following command to set up the database schema:
+   ```bash
+   docker-compose exec web rails db:prepare
+   ```
+
 ---
 
 ## Project Structure
