@@ -1,4 +1,10 @@
 class Book < ApplicationRecord
+  after_initialize :set_default_status, if: :new_record?
+
+  def set_default_status
+    self.status ||= :available
+  end
+
   belongs_to :user
 
   geocoded_by :location
@@ -35,6 +41,7 @@ class Book < ApplicationRecord
     if coordinates[location]
       self.latitude = coordinates[location][0]
       self.longitude = coordinates[location][1]
+      @geolocation_executed = true
     end
   end
 

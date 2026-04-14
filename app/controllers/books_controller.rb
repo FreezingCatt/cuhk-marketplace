@@ -17,7 +17,7 @@ class BooksController < ApplicationController
 
   def create
     @book = Book.new(book_params)
-    @book.user = User.first
+    @book = current_user.books.build(book_params)
     if @book.save
       redirect_to @book, notice: 'Book listed successfully'
     else
@@ -41,6 +41,8 @@ class BooksController < ApplicationController
     redirect_to books_url, notice: 'Book removed'
   end
 
+  before_action :authorize_owner!, only: [:edit, :update, :destroy]
+
   private
 
   def set_book
@@ -51,3 +53,9 @@ class BooksController < ApplicationController
     params.require(:book).permit(:title, :author, :price, :condition, :location, :status)
   end
 end
+
+  def authorize_owner!
+    unless @book.user == current_user
+      redirect_to root_path, alert: "You are not authorized!"
+    end
+  end
