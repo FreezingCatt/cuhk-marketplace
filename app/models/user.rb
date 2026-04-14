@@ -5,3 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
   has_many :books, dependent: :destroy
 end
+
+class User < ApplicationRecord
+  CUHK_EMAIL_REGEX = /\A[\w+\-.]+@(link\.)?cuhk\.edu\.hk\z/i
+
+  validates :email, presence: true, 
+                    format: { with: CUHK_EMAIL_REGEX, 
+                              message: "must be a valid CUHK email address" }
+end
