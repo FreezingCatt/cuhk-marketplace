@@ -1,0 +1,36 @@
+<h1>Ratings for <%= @user.email %></h1>
+
+<% if @user.average_rating %>
+  <div class="alert alert-info">
+    <strong>Average Rating:</strong> <%= number_with_precision(@user.average_rating, precision: 1) %>/5
+  </div>
+<% else %>
+  <div class="alert alert-info">
+    <strong>No ratings yet.</strong>
+  </div>
+<% end %>
+
+<% if @ratings.empty? %>
+  <p>No ratings found.</p>
+<% else %>
+  <div class="list-group">
+    <% @ratings.each do |rating| %>
+      <div class="list-group-item">
+        <h4 class="list-group-item-heading">
+          From: <%= rating.rater.email %>
+          <span class="badge badge-primary float-right">
+            <%= rating.score %>/5
+          </span>
+        </h4>
+        <p class="list-group-item-text"><%= rating.comment %></p>
+        <p class="text-muted"><%= rating.created_at.strftime('%Y-%m-%d') %></p>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<% if current_user != @user %>
+  <%= link_to 'Submit Rating', new_rating_path(ratee_id: @user.id), class: 'btn btn-primary mt-3' %>
+<% end %>
+
+<%= link_to 'Back', root_path, class: 'btn btn-secondary mt-3' %>
