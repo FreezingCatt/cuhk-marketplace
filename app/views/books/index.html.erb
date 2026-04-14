@@ -1,0 +1,64 @@
+<h1>CUHK Second-hand Books</h1>
+
+<%= search_form_for @q, class: 'filter-form' do |f| %>
+  <div class="filter-row">
+    <div class="filter-group">
+      <%= f.label :title_or_author_cont, 'Search' %>
+      <%= f.search_field :title_or_author_cont, placeholder: 'Title or author...' %>
+    </div>
+
+    <div class="filter-group">
+      <%= f.label :author_cont, 'Author' %>
+      <%= f.search_field :author_cont, placeholder: 'Author name' %>
+    </div>
+
+    <div class="filter-group">
+      <%= f.label :condition_eq, 'Condition' %>
+      <%= f.select :condition_eq, 
+            ['Like New', 'Very Good', 'Good', 'Acceptable'].map { |c| [c, c] },
+            { include_blank: 'All conditions' } %>
+    </div>
+
+    <div class="filter-group">
+      <%= f.label :location_cont, 'Location' %>
+      <%= f.search_field :location_cont, placeholder: 'College name' %>
+    </div>
+
+    <div class="filter-group">
+      <%= f.label :price_gteq, 'Min Price (HK$)' %>
+      <%= f.number_field :price_gteq, placeholder: '0' %>
+    </div>
+
+    <div class="filter-group">
+      <%= f.label :price_lteq, 'Max Price (HK$)' %>
+      <%= f.number_field :price_lteq, placeholder: '500' %>
+    </div>
+
+    <div class="filter-actions">
+      <%= f.submit 'Filter' %>
+      <%= link_to 'Clear', books_path %>
+    </div>
+  </div>
+<% end %>
+
+<div class="books-grid">
+  <% if @books.any? %>
+    <% @books.each do |book| %>
+      <div class="book-card">
+        <h3><%= link_to book.title, book %></h3>
+        <p class="author">by <%= book.author %></p>
+        <p class="price">HK$ <%= book.price %></p>
+        <p class="meta">
+          Condition: <%= book.condition %> | 
+          Location: <%= book.location %> | 
+          Status: <span class="status-<%= book.status %>"><%= book.status.humanize %></span>
+        </p>
+        <p class="seller">Seller: <%= book.user.email %></p>
+      </div>
+    <% end %>
+  <% else %>
+    <p>No books found.</p>
+  <% end %>
+</div>
+
+<%= link_to 'Sell a Book', new_book_path, class: 'btn-sell' %>

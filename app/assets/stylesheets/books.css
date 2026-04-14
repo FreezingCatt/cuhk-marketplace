@@ -1,0 +1,79 @@
+.filter-form {
+  background: #eee;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.filter-group {
+  display: inline-block;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.filter-group label {
+  display: block;
+  font-size: 12px;
+}
+
+.filter-actions {
+  display: inline-block;
+}
+
+.filter-actions input, .filter-actions a {
+  padding: 5px 10px;
+}
+
+.books-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.book-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  width: 300px;
+}
+
+.price {
+  color: green;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.status-available { color: green; }
+.status-reserved { color: orange; }
+.status-sold { color: red; }
+
+.btn-sell {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 15px;
+  background: green;
+  color: white;
+  text-decoration: none;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-group input, .form-group select {
+  padding: 5px;
+  width: 300px;
+}
+
+.form-actions {
+  margin-top: 20px;
+}
+
+.error-messages {
+  background: #fcc;
+  padding: 10px;
+  margin-bottom: 20px;
+}
