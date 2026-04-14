@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :books, dependent: :destroy
+  has_many :ratings, dependent: :destroy
 
   CUHK_EMAIL_REGEX = /\A[\w+\-.]+@(link\.)?cuhk\.edu\.hk\z/i
 
