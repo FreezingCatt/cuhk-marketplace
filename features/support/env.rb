@@ -20,3 +20,20 @@ rescue NameError
 end
 
 Cucumber::Rails::Database.javascript_strategy = :truncation
+
+require 'geocoder'
+
+Geocoder.configure(lookup: :test, ip_lookup: :test)
+
+Geocoder::Lookup::Test.add_stub(
+  "United College", [
+    {
+      'latitude'     => 22.4178,
+      'longitude'    => 114.2075,
+      'address'      => 'United College, CUHK',
+      'state'        => 'Hong Kong',
+      'country'      => 'China',
+      'country_code' => 'HK'
+    }
+  ]
+)
