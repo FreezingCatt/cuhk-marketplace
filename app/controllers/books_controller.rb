@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   skip_before_action :verify_authenticity_token, only: [:create, :update, :destroy]
-  #before_action :authenticate_user!, except: [:index, :show]
+  before_action :authenticate_user!, except: [:index, :show]
   before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def index
