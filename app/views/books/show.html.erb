@@ -6,6 +6,8 @@
 <p><strong>Status:</strong> <%= @book.status.humanize %></p>
 <p><strong>Seller:</strong> <%= @book.user.email %></p>
 
+<p><strong>Rating:</strong> <%= @book.average_rating %> / 10 (<%= @book.rating_count %> reviews)</p>
+
 <% if @book.latitude && @book.longitude %>
   <div id="map" style="height: 300px; width: 100%; margin-top: 20px;"></div>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
@@ -15,6 +17,30 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
     L.marker([<%= @book.latitude %>, <%= @book.longitude %>]).addTo(map);
   </script>
+<% end %>
+
+<% if current_user && current_user != @book.user %>
+  <h3>Rate this book</h3>
+  <%= form_with url: book_ratings_path(@book), local: true do |f| %>
+    <div>
+      <%= f.label :score, "Score (1-10)" %>
+      <%= f.number_field :score, in: 1..10, required: true %>
+    </div>
+    <div>
+      <%= f.label :comment, "Comment (optional)" %>
+      <%= f.text_area :comment %>
+    </div>
+    <%= f.submit "Submit Rating" %>
+  <% end %>
+<% end %>
+
+<h3>Reviews</h3>
+<% @book.ratings.each do |rating| %>
+  <div>
+    <strong>Score: <%= rating.score %>/10</strong>
+    <p><%= rating.comment %></p>
+    <small>by <%= rating.user.email %></small>
+  </div>
 <% end %>
 
 <% if current_user == @book.user %>

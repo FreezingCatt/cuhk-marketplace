@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-user = User.find_or_create_by!(email: 'student@example.com') do |u|
+user = User.find_or_create_by!(email: 'student@link.cuhk.edu.hk') do |u|
   u.password = '123456'
   u.password_confirmation = '123456'
 end
@@ -31,3 +31,6 @@ books.each do |book|
     status: :available
   )
 end
+
+puts "Created #{Book.count} books"
+puts "User email: student@link.cuhk.edu.hk, password: 123456"

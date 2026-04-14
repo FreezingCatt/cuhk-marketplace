@@ -6,6 +6,15 @@ class Book < ApplicationRecord
   end
 
   belongs_to :user
+  has_many :ratings, dependent: :destroy
+
+  def average_rating
+    ratings.average(:score).to_f.round(1)
+  end
+
+  def rating_count
+    ratings.count
+  end
 
   geocoded_by :location
   after_validation :geocode, if: :location_changed?
